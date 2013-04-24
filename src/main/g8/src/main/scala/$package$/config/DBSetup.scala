@@ -1,8 +1,8 @@
 package $package$.config
 
-import $package$.model.Role
-import $package$.lib.APermission
-import $package$.model.Permission
+import net.liftmodules.mapperauth.model.Role
+import net.liftmodules.mapperauth.APermission
+import net.liftmodules.mapperauth.model.Permission
 import $package$.model.User
 
 object DBSetup {

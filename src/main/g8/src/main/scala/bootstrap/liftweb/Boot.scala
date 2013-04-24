@@ -10,7 +10,7 @@ import util.Helpers._
 import $package$.config._
 import $package$.model.{SystemUser, User}
 import net.liftmodules.extras.{Gravatar, LiftExtras}
-import $package$.lib.AppConfig
+import net.liftmodules.mapperauth.MapperAuth
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -26,11 +26,12 @@ class Boot extends Loggable {
     DBSetup.run()
 
     // init configuration
-    AppConfig.authUserMeta.default.set(User)
-    AppConfig.loginTokenAfterUrl.default.set(Site.password.url)
-    AppConfig.siteName.default.set("AGYNAMIX Template")
-    AppConfig.systemEmail.default.set(SystemUser.user.email.is)
-    AppConfig.systemUsername.default.set(SystemUser.user.name.is)
+    MapperAuth.init()
+    MapperAuth.authUserMeta.default.set(User)
+    MapperAuth.loginTokenAfterUrl.default.set(Site.password.url)
+    MapperAuth.siteName.default.set("AGYNAMIX Template")
+    MapperAuth.systemEmail.default.set(SystemUser.user.email.is)
+    MapperAuth.systemUsername.default.set(SystemUser.user.name.is)
 
     // For S.loggedIn_? and TestCond.loggedIn/Out builtin snippet
     LiftRules.loggedInTest = Full(() => User.isLoggedIn)

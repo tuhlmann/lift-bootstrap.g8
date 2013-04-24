@@ -13,7 +13,7 @@ import util._
 import Helpers._
 import net.liftmodules.extras.{Gravatar, SnippetHelper}
 import $package$.model.ExtSession
-import $package$.lib.LoginRedirect
+import net.liftmodules.mapperauth.LoginRedirect
 
 sealed trait UserSnippet extends SnippetHelper with Loggable {
 

@@ -17,14 +17,24 @@ import net.liftweb.http.SessionVar
 import net.liftweb.http.S
 import net.liftweb.http.RedirectResponse
 import net.liftweb.mapper.By
-import $package$.lib.ProtoAuthUser
+import net.liftmodules.mapperauth.lib.ProtoAuthUser
 import net.liftweb.mapper.MappedLocale
 import net.liftweb.mapper.MappedTimeZone
 import net.liftweb.mapper.MappedString
 import net.liftweb.mapper.MappedTextarea
 import net.liftweb.mapper.MappedLongForeignKey
-import $package$.lib.ProtoAuthUserMeta
-import $package$.lib.AppConfig
+import net.liftmodules.mapperauth.lib.ProtoAuthUserMeta
+import net.liftmodules.mapperauth.MapperAuth
+
+/**
+ * A trait to mix in with table definitions that need a user reference
+ */
+trait UserId[OwnerType <: UserId[OwnerType]] extends Mapper[OwnerType] {
+  self: OwnerType =>
+  object userId extends MappedLongForeignKey(this, User) {
+    override def dbIndexed_? = true
+  }
+}
 
 class User private () extends ProtoAuthUser[User] {
   def getSingleton = User
@@ -122,11 +132,11 @@ object User extends User with ProtoAuthUserMeta[User] with Loggable {
   /*
    * Lift Bootstrap Auth vars
    */
-  private lazy val siteName           = AppConfig.siteName.vend
-  private lazy val sysUsername        = AppConfig.systemUsername.vend
-  private lazy val indexUrl           = AppConfig.indexUrl.vend
-  private lazy val registerUrl        = AppConfig.registerUrl.vend
-  private lazy val loginTokenAfterUrl = AppConfig.loginTokenAfterUrl.vend
+  private lazy val siteName           = MapperAuth.siteName.vend
+  private lazy val sysUsername        = MapperAuth.systemUsername.vend
+  private lazy val indexUrl           = MapperAuth.indexUrl.vend
+  private lazy val registerUrl        = MapperAuth.registerUrl.vend
+  private lazy val loginTokenAfterUrl = MapperAuth.loginTokenAfterUrl.vend
 
   /*
    * LoginToken
@@ -178,7 +188,7 @@ object User extends User with ProtoAuthUserMeta[User] with Loggable {
       """.format(siteName, token.url, sysUsername).stripMargin
 
     sendMail(
-      From(AppConfig.systemFancyEmail),
+      From(MapperAuth.systemFancyEmail),
       Subject("%s Password Help".format(siteName)),
       To(user.fancyEmail),
       PlainMailBodyType(msgTxt)
@@ -219,7 +229,7 @@ object SystemUser {
 
   lazy val user: User = User.find(By(User.username, username)) openOr {
     User.create
-      .name(AppConfig.siteName.vend)
+      .name(MapperAuth.siteName.vend)
       .username(username)
       .email(email)
       .locale("en_US")

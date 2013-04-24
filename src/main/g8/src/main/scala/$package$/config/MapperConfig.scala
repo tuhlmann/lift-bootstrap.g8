@@ -9,9 +9,9 @@ import net.liftweb.db.DefaultConnectionIdentifier
 import net.liftweb.mapper.Schemifier
 import net.liftweb.http.S
 import $package$.model.User
-import $package$.model.ExtSession
-import $package$.model.Permission
-import $package$.model.Role
+import net.liftmodules.mapperauth.model.ExtSession
+import net.liftmodules.mapperauth.model.Permission
+import net.liftmodules.mapperauth.model.Role
 import $package$.model.Todo
 
 object MapperConfig extends Loggable {

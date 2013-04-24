@@ -17,13 +17,13 @@ import net.liftweb.http.SessionVar
 import net.liftweb.http.S
 import net.liftweb.http.RedirectResponse
 import net.liftweb.mapper.By
-import net.liftmodules.mapperauth.lib.ProtoAuthUser
+import net.liftmodules.mapperauth.ProtoAuthUser
 import net.liftweb.mapper.MappedLocale
 import net.liftweb.mapper.MappedTimeZone
 import net.liftweb.mapper.MappedString
 import net.liftweb.mapper.MappedTextarea
 import net.liftweb.mapper.MappedLongForeignKey
-import net.liftmodules.mapperauth.lib.ProtoAuthUserMeta
+import net.liftmodules.mapperauth.ProtoAuthUserMeta
 import net.liftmodules.mapperauth.MapperAuth
 
 /**

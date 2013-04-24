@@ -12,7 +12,6 @@ import http.js.JsCmds._
 import util._
 import Helpers._
 import net.liftmodules.extras.{Gravatar, SnippetHelper}
-import $package$.model.ExtSession
 import net.liftmodules.mapperauth.LoginRedirect
 import net.liftmodules.mapperauth.model.ExtSession
 

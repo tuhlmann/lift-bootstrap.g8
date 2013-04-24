@@ -27,6 +27,7 @@ import net.liftmodules.mapperauth.ProtoAuthUserMeta
 import net.liftmodules.mapperauth.MapperAuth
 import net.liftweb.mapper.Mapper
 import net.liftmodules.mapperauth.model.LoginToken
+import net.liftmodules.mapperauth.model.ExtSession
 
 
 /**
@@ -127,8 +128,7 @@ object User extends User with ProtoAuthUserMeta[User] with Loggable {
   override def onLogOut: List[Box[User] => Unit] = List(
     x => logger.debug("User.onLogOut called."),
     boxedUser => boxedUser.foreach { u =>
-      //ExtSession.deleteExtCookie()
-      ExtSession.userDidLogout(Empty)
+      ExtSession.deleteExtCookie()
     }
   )
 
@@ -201,7 +201,7 @@ object User extends User with ProtoAuthUserMeta[User] with Loggable {
   /*
    * ExtSession
    */
-  def createExtSession(uid: String) = ExtSession.logUserIdIn(uid)
+  def createExtSession(uid: String) = ExtSession.createExtSession(uid)
 
   /*
   * Test for active ExtSession.
@@ -227,8 +227,8 @@ object User extends User with ProtoAuthUserMeta[User] with Loggable {
 case class LoginCredentials(val email: String, val isRememberMe: Boolean = false)
 
 object SystemUser {
-  private val username = "$name;format="norm"$"
-  private val email = "$admin_email$"
+  private val username = "lbs20"
+  private val email = "help@localhost.com"
 
   lazy val user: User = User.find(By(User.username, username)) openOr {
     User.create
@@ -238,7 +238,8 @@ object SystemUser {
       .locale("en_US")
       .timezone("America/Chicago")
       .verified(true)
-      .password("$admin_password$") // TODO: set me
+      .password("abc123") // TODO: set me
       .saveMe
   }
 }
+

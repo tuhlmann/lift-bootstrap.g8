@@ -5,7 +5,6 @@ import net.liftweb.util.Helpers._
 import net.liftweb.json.JsonDSL._
 import net.liftweb.mapper._
 import net.liftmodules.mapperauth.model.share.MapperWithId
-import net.liftmodules.mapperauth.model.share.UserId
 import net.liftweb.json.JsonAST._
 import net.liftweb.json.JsonAST.JField
 import net.liftweb.json.JsonAST.JObject

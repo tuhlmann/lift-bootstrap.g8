@@ -25,6 +25,9 @@ import net.liftweb.mapper.MappedTextarea
 import net.liftweb.mapper.MappedLongForeignKey
 import net.liftmodules.mapperauth.ProtoAuthUserMeta
 import net.liftmodules.mapperauth.MapperAuth
+import net.liftweb.mapper.Mapper
+import net.liftmodules.mapperauth.model.LoginToken
+
 
 /**
  * A trait to mix in with table definitions that need a user reference
@@ -147,7 +150,7 @@ object User extends User with ProtoAuthUserMeta[User] with Loggable {
         at.delete_!
         RedirectWithState(indexUrl, RedirectState(() => { S.error("Login token has expired") }))
       }
-      case Full(at) => at.userId.obj.map(user => {
+      case Full(at) => find(at.userId.is).map(user => {
         if (user.validate.length == 0) {
           user.verified(true)
           user.save

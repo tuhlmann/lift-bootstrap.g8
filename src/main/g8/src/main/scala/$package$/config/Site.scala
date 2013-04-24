@@ -7,7 +7,7 @@ import common._
 import http.S
 import sitemap._
 import sitemap.Loc._
-import $package$.lib.Locs
+import net.liftmodules.mapperauth.Locs
 
 object MenuGroups {
   val SettingsGroup = LocGroup("settings")

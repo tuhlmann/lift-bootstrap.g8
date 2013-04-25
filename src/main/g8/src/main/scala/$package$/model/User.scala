@@ -93,9 +93,9 @@ class User private () extends ProtoAuthUser[User] {
 
   def whenCreated: DateTime = new DateTime(createdAt.is)
 
-  def authRoles: Set[String] = {
-    userRoles.names.toSet
-  }
+//  override def authRoles: Set[String] = {
+//    userRoles.names.toSet
+//  }
 
 
 }

@@ -58,8 +58,8 @@ object MapperSpecsModel {
     }
 
     Schemifier.destroyTables_!!(DefaultConnectionIdentifier, if (doLog) Schemifier.infoF _ else ignoreLogger _)
-    Schemifier.destroyTables_!!(DbProviders.SnakeConnectionIdentifier, if (doLog) Schemifier.infoF _ else ignoreLogger _, User)
+    Schemifier.destroyTables_!!(DbProviders.SnakeConnectionIdentifier, if (doLog) Schemifier.infoF _ else ignoreLogger _, User, Permission, Role)
     Schemifier.schemify(true, if (doLog) Schemifier.infoF _ else ignoreLogger _, DefaultConnectionIdentifier)
-    Schemifier.schemify(true, if (doLog) Schemifier.infoF _ else ignoreLogger _, DbProviders.SnakeConnectionIdentifier, User)
+    Schemifier.schemify(true, if (doLog) Schemifier.infoF _ else ignoreLogger _, DbProviders.SnakeConnectionIdentifier, User, Permission, Role)
   }
 }

@@ -3,6 +3,9 @@ import $package$.DbProviders
 import $package$.BaseSpec
 import $package$.MapperSpecsModel
 import org.scalatest.BeforeAndAfterAll
+import net.liftmodules.mapperauth.APermission
+import net.liftmodules.mapperauth.model.Role
+import net.liftmodules.mapperauth.model.Permission
 
 class UserSpec extends BaseSpec with BeforeAndAfterAll {
 
@@ -71,6 +74,51 @@ class UserSpec extends BaseSpec with BeforeAndAfterAll {
         u.password.match_?(userPass) should equal(true)
       })
     }
+
+    "Can add and retrieve permissions" in {
+
+      val userPass = "testpass3"
+      val myRoleName = "my_super_role"
+      // create a new User instance
+      val newUser = User.create.email("test3@liftweb.net").name("Test3").username("Test3").password(userPass)
+
+      // save to db
+      newUser.save
+
+      User.hasRole(newUser, myRoleName) should be (false)
+
+      Role.findOrCreateAndSave(myRoleName, "some category", Permission.fromAPermission(APermission("printers")))
+
+      val myRole = Role.find(myRoleName)
+      myRole.isDefined === true
+
+      newUser.userRoles.addRole(myRoleName).saveMe
+
+      Permission.addUserPermission(newUser.id.is, APermission("laundry"))
+
+      // retrieve from db and compare
+      val userFromDb = User.find(newUser.id.is)
+
+      userFromDb.isDefined should equal(true)
+      userFromDb.map(u => {
+//        println("XXX MY USer: "+u.authRoles)
+//        println("XXX HAS ROLE: "+u.authRoles.exists{r => println("XX Check %s vs %s".format(r, myRoleName)); r == myRoleName})
+
+        User.hasRole(u, myRoleName) should be (true)
+        User.hasPermission(u, APermission.all) should be (false)
+        User.hasPermission(u, APermission("printers")) should be (true)
+        //println("XX Laundry: "+User.hasPermission(u, APermission("laundry")))
+        User.hasPermission(u, APermission("laundry")) should be(true)
+
+        u.id.is should equal(newUser.id.is)
+        u.password.match_?("xxxxx") should equal(false)
+        u.password.match_?(userPass) should equal(true)
+      })
+    }
+
+
   }
+
+
 
 }

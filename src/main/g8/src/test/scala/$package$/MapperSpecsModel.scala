@@ -7,6 +7,8 @@ import net.liftweb.mapper.BaseMapper
 import java.util.Locale
 import net.liftweb.mapper.Schemifier
 import net.liftweb.db.DefaultConnectionIdentifier
+import net.liftmodules.mapperauth.model.Permission
+import net.liftmodules.mapperauth.model.Role
 import $package$.model.User
 
 /*

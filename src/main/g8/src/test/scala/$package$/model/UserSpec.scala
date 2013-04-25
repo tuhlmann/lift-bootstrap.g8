@@ -94,7 +94,7 @@ class UserSpec extends BaseSpec with BeforeAndAfterAll {
 
       newUser.userRoles.addRole(myRoleName).saveMe
 
-      Permission.addUserPermission(newUser.id.is, APermission("laundry"))
+      Permission.createUserPermission(newUser.id.is, APermission("laundry")).saveMe
 
       // retrieve from db and compare
       val userFromDb = User.find(newUser.id.is)

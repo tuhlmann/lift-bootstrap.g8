@@ -46,7 +46,7 @@ The [sbt-closure](https://github.com/eltimn/sbt-closure) plugin is used to compi
 User Model
 ----------
 
-This app uses a port of [Mongoauth Lift Module](https://github.com/eltimn/lift-mongoauth).
+This app uses [Mapperauth](https://github.com/liftmodules/mapperauth), a port of [Mongoauth Lift Module](https://github.com/eltimn/lift-mongoauth).
 The registration and login implementation is based on
 [research done by Google](http://sites.google.com/site/oauthgoog/UXFedLogin) a few years ago
 and is similar to Amazon.com and Buy.com. It's different than what most people seem to expect,

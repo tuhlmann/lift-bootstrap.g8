@@ -6,7 +6,7 @@ SQL.
 
 [g8](http://github.com/n8han/giter8) template to get a Lift-Bootstrap/SQL webapp up and running quickly.
 The template generates a project that uses [Twitter's Bootstrap](http://twitter.github.com/bootstrap/)
-and uses a SQL port of [Mongoauth Lift Module](https://github.com/eltimn/lift-mongoauth). It uses SBT 0.12
+and uses [Mapperauth](https://github.com/liftmodules/mapperauth), a SQL port of [Mongoauth Lift Module](https://github.com/eltimn/lift-mongoauth). It uses SBT 0.12
 as the build tool.
 
 Usage

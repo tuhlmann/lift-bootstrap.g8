@@ -20,11 +20,8 @@ resolvers ++= Seq(
     "org.specs2"              %% "specs2"            % "1.14"                  % "test",
     "org.pegdown"             %  "pegdown"           % "1.1.0"                 % "test",
     "org.scalatest"           %% "scalatest"         % "2.0.M5b"               % "test",
-    "cc.co.scala-reactive"    %% "reactive-core"     % "0.3.0" intransitive(),
-    "cc.co.scala-reactive"    %% "reactive-web"      % "0.3.0" intransitive(),
     "org.eclipse.jetty"       %  "jetty-webapp"      % "8.1.7.v20120910"       %  "container",
     "net.liftmodules"         %% "mapperauth_2.5"    % "0.1-SNAPSHOT"          %  "compile",
-    "net.liftmodules"         %% "widgets_2.5"       % "1.3"                   %  "compile",
     "net.liftmodules"         %% "extras_2.5"        % "0.1"                   %  "compile",
     "com.h2database"          %  "h2"                % "1.2.138"
   )
